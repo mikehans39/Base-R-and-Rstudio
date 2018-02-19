@@ -1,0 +1,471 @@
+---
+title: "Intro to R"
+output:
+  html_notebook: default
+  html_document: default
+  pdf_document: default
+---
+    Michael Hansen, MD
+    updated 2/13/18
+
+## What is R and Rstudio
+
+R is a statistical software package that has built in functionalities but remains open source allowing for rapid expansion of new functions, syntax, and overall uses. 
+
+**Rstudio** is a result of open source formatting.
+
+- essentially, a group of R enthusiasts came together and wanted to make some aspects of using R better and/or easier.
+
+- Rstudio specifically focused on the environment interface and that is the largest difference between Rstudio and 'base R'.
+
+- Rstudio features text editors, version control, keyboard shortcuts, debugging tools, etc. 
+
+
+## Functions, Objects, and Packages
+
+**Functions** are the written commands that preform actions onto *'objects'*.
+
+**Objects** are the unique variables that R is intended to operate upon based on software's database (*'packages'*) of *'functions'*.
+
+**Packages** are sequences of R code that create new *functions* and *objects* that can be downloaded and used in your R program.
+
+
+```{r}
+
+#install.packages() is a function to download premade and approved packages from the CRAN
+
+install.packages("ggplot2")
+
+#after the package is installed in your *library* it still needs to be activated
+
+library(ggplot2)
+
+#while the package is called 'ggplot2' it contains a host of new functions (e.g. ggplot, qplot, last_plot, ggsave, etc)
+
+
+```
+
+ 
+####CRAN :: Comprehensive R Archive Network
+Home to base R, its source code, and all possible packages for R (including R studio)
+
+\textbf{https://cran.r-project.org/}
+<em>https://cran.r-project.org/
+
+While all of this information is meticulously scrutinized before it is published and made accessible to to download, security and reliability remains an often debated topic. Probably the largest hurdle yet to overcome in its professional application.
+
+##R Community, Syntax, and Best Practices
+
+One of the greatest strengths of open source software is that it collects like-minded individuals to collaborate and solve problems. R is no exception but R has an extremely flexible coding language and has many ways to address the same problem.
+
+Technically, all functions and packages are founded in 'base R' code and concepts. However, new functions and packages continue to build on top of one another, burying the base code and essentially create a new coding language that looks completely different from the original. 
+
+If one group monopolizes the package production, they control the syntax. In some ways this is good, 'base R' can be incredibly redundant and limiting, a better common language can lead to great improvements and Rstudio has done that, else, their packages wouldn't be as popular as they are. However, if you learn their syntax exlusively, you are not learning the real open source version of R, you are learning Rstudio's version of R. 
+
+On a larger scale, Rstudio's control of not only syntax but user interface as well, has greater **implications in data collection, management, and presentation** (i.e. this markdown document).
+
+While all of their packages can be downloaded into 'base R', not all of the functions will necessary work properly without other packages or functions only found in Rstudio. 
+
+##Base R Functions, Syntax, and Code
+
+So what comes with 'base R'?
+
++ built in functions that allow creation and manipulation of data
++ ability to store data in particular ways
++ create new functions 
++ download packages
+
+```{r}
+2+3
+
+3>2
+
+round(3.14)
+
+pi
+
+a  <- c(1,2,3,4,5)
+print(a)
+
+b  <- matrix(1:9, 3)
+b
+
+mean(b)
+
+c  <- data.frame(col_1 = 1:15, col_2 = 7:21, col_3 = 5:19)
+c
+
+library(ggplot2)
+#this is an added package which can work with base R syntax or a simplified version of its own, new, syntax
+ggplot(c)+geom_point(aes(col_1, col_2))
+
+```
+
+
+####How does base R identify *Data* and *Objects*
+
+There are five main *data* types:
+
++ **Numbers**
++ **Integers**
++ **Character**
++ **Logical**
++ Factor 
+: this is R's form of categorical data, uses 'levels' to differentiate integer based values
+
+There are five types of *objects*:
+
++ **Vectors** (one dimensional array, one data type)
++ **Matrices** (two dimensional array, one data type)
++ **Arrays** (three dimensional array, one data type)
++ **Data Frames** (two dimensional array, multiple data types)
++ **List** (one dimension, multiple objects and/or data types)
+
+```{r}
+print(a)
+
+class(a)
+
+print(b)
+
+class(b)
+
+c
+
+class(c)
+```
+
+####R generated classification and manual reclassification of data and structure types :: **"Coercion"**
+
+When creating data within R or importing it from another document, R will often self designate data types automatically.
+
++ It's ultimate fall back is always to designate as a **character**
+
++ **Logical** data can be changed to **numeric** (TRUE = 1, FALSE = 0) or to **character** (TRUE = "TRUE", FALSE = "FALSE")
+
++ **Numeric** data can be changed to **character** (1,2,3 = "1", "2", "3")
+
+
+
+These classifications can be manually changed by the user with simple commands 
+
++ as.numeric()
++ as.character()
++ as.logical()
++ as.factor()
+
++ as.vector()
++ as.matrix()
++ as.array()
++ as.list()
++ as.data.frame()
+
+
+####**"Subsetting"** in base R
+
+Identifying specific rows, columns, and datum within an object is essential for any data management and analysis. 
+
+Base R focuses on using parentheses, brackets, special character('$') and 'order of functions' to isolate different variables. 
+
+1. **Numeric Indexing** 
+
+This method allows for identifying whole rows, whole columns, and specific datum at a cross section.
+
+```{r}
+b
+
+b[1,]
+
+b[,3]
+
+b[1,3]
+
+b[1,3]  <- 9
+b
+
+```
+
+
+2. **Accessor "$" Indexing**
+
+The Accessor method uses a symbol ("$") to identify specifically named columns or items in a data frame or list, respectively.
+
+```{r}
+c
+
+c[,1]
+
+c$col_1
+
+sum(c$col_1)
+
+
+mean(c$col_1)
+
+
+```
+
+####Summary statistics in base R
+
+1. **visualizing** the core data can be done several ways. Best to think of it inside the console versus outside the console. 
+
+```{r}
+c
+
+print(c)
+
+head(c)
+
+tail(c)
+
+View(c)
+```
+
+2. **characterizing the structure** of the data is useful for better understanding large data sets and confirming that it the input or import captured your data correctly.
+
+```{r}
+
+dim(c)
+
+str(c)
+
+names(c)
+
+ncol(c)
+
+nrow(c)
+
+summary(c)
+
+table(c$col_3)
+
+b
+table(b)
+table(b[,3])
+
+
+## This is where outside packages can come into play and provide better tools
+
+install.packages('skimr')
+library(skimr)
+
+skim(c)
+
+```
+
+####Manipulating old data and adding new data
+
+As we saw above, using base R we can change individual datum points:
+
+```{r}
+b
+b[1,3]  <- 7
+b
+
+```
+
+Similar rules apply when we want to change more than one datum:
+
+```{r}
+d  <- c(11,14,17)
+b[1,]  <- d
+b
+```
+
+```{r}
+e  <- c("blue", "red", "green")
+b[2,]  <- e
+b
+```
+
+
+We can change how data is classified:
+
+```{r}
+a
+class(a)
+
+a  <- as.character(a)
+a
+class(a)
+```
+
+```{r}
+
+b[2,]  <- a[1:3]
+b
+
+b <- as.numeric(b)
+b
+
+b  <- matrix(b, nrow = 3)
+b
+
+```
+
+
+We can "sort" data:
+
+```{r}
+b_sorted  <- sort(b)
+b_sorted
+```
+
+
+We can "order" data:
+
+```{r}
+b_ordered  <- order(b)
+b_ordered
+```
+
+
+We can "rank" data:
+
+```{r}
+b_ranked  <- rank(b)
+b_ranked
+
+```
+
+```{r}
+
+df  <- data.frame(as.vector(b),b_sorted, b_ordered, b_ranked)
+
+df
+
+
+```
+
+
+We can "index" data and we can use that to **filter** data:
+
+```{r}
+
+a  <- 1:9
+a  <- as.character(a)
+e  <- c("pink", "red", "pink", "yellow", "pink", "blue", "blue", "pink", "pink")
+e
+
+df_2  <- data.frame(a,df, e)
+df_2
+
+pink  <- df_2$e == "pink"
+pink
+
+top_half  <- df_2$b_ranked >= mean(df_2$b_ranked)
+top_half
+
+filter_variables  <- pink & top_half
+
+df_2$as.vector.b.[filter_variables]
+
+table(filter_variables)
+
+
+```
+
+We can add, move, and remove columns:
+
+```{r}
+
+df
+a
+
+
+#ADD
+df$a  <- a
+df
+
+df  <- cbind(df,"color" = e)
+df
+
+#MOVE
+df  <- subset(df, select=c(a, as.vector.b.:color))
+df
+
+
+#REMOVE or DROP or KEEP 
+df$b_sorted  <- NULL
+df
+
+#this version does not alter or delete information from the original data frame 
+df[ ,names(df) != 'b_ordered']
+df
+
+
+df_3  <- df[,names(df != 'b_ordered')]
+df_3
+
+
+df_4  <- df[ , !(names(df) == 'b_ordered')]
+df_4$a.1  <- NULL
+df_4
+
+```
+
+
+
+We can add, move, and remove observations:
+
+```{r}
+
+#new observation
+new_ob  <- c("10", 22, 10.0, "blue")
+
+new_ob
+
+df_4  <- rbind(df_4, new_ob)
+df_4
+
+
+#move observations 
+
+
+
+#delete observations 
+```
+
+
+
+We can "match" data:
+
+
+We can "%in%" data:
+
+
+
+##Rstudio Environment
+
+
+###Uploading Data
+
+
+###New packages, New code
+
+
+###Data Management
+
+
+###Data Visualization
+
+
+###Data Analysis
+
+
+###Data Communication
+
+
+
+##Git and GitHub
+
+
+
+####What does Git and GitHub have to do with R?
+
+GitHub comes back to the community and collaboration aspect of R and Rstudio. Sharing code, projects, and results are all important parts of a new open source way of communicating in a particular scientific world. 
+
+Outside of the conceptual level, there is a practical level as well. Coding text within Git follows the exact same rules as Markdown which makes the transition of a .Rmd onto a Git and GitHub very easy. This makes Rstudio users immediately more interested in Git and programmers who are familiar with Git more attracted to R. 
+
+
+
