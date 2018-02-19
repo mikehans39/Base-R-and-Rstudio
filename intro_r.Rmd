@@ -459,6 +459,26 @@ We can "%in%" data:
 
 ##Git and GitHub
 
+What is Git ::
+  It is a **'Version Control Program'**, which as a whole, functions so that it allows for collaboration on text documents, auto saves all of your work, helps prevent over-writing, stores several back-ups and prevents data loss (central storage and multiple local copies), allows for analysis of project development and collaboration.
+  
+  There are two main types of Version Control Programs:
+  + **Central** :all information, changes, history, is stored on each contributors local interface
+  + **Distributed** :there is a central repository of the 'master' document and a coded history of all former drafts and the changes that have taken place over time. Each individual contributor creates a subpath to their local repositories where they work on their version independently and update the master document periodically.
+  
+  There are different brands of Version Control Programs:
+  + git
+  + apache subversion (SBV)
+  + CVS
+  + Mercurial 
+  
+  Git was developed by Linus Torvalds while he was creating the Linux kernal. It allowed for multiple programmers to work on one project simultaneously and interrupted without overcoding each other and mapping where changes were made and who made them. This process allows for a *non-linear work flow environment*. This tool was then published with a public license and is now open source and free to download. 
+  
+  
+  However, Git only provides the **interface**, **coding for the functional interaction**, and the **local repository**. It does not provide the **central repository**.
+  
+  
+  The central repository is what ties all of the contributors to the same document(s). This could be as simple as a single computer in a network, a server within the same building of all of the contributors, or much more commonly now are remote repositories online. And this is where GitHub comes in to play.   
 
 
 ####What does Git and GitHub have to do with R?
