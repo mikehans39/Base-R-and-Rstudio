@@ -487,5 +487,5 @@ GitHub comes back to the community and collaboration aspect of R and Rstudio. Sh
 
 Outside of the conceptual level, there is a practical level as well. Coding text within Git follows the exact same rules as Markdown which makes the transition of a .Rmd onto a Git and GitHub very easy. This makes Rstudio users immediately more interested in Git and programmers who are familiar with Git more attracted to R. 
 
-
+This line was added on my work computer.
 
