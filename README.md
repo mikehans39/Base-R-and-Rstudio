@@ -3,3 +3,7 @@ Instructional intro into R statistical software
 this is a test line from the terminal of my laptop
 /n/n this is a line break example
 \n\n why wont the lines split
+
+
+
+how about this
